@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .warning {
+        text-align: center;
+        color: red;
+        margin-bottom: 10px;
+        font-style: italic;
+    }
+
+    .test-description {
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+        width: 300px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    button[type="submit"] {
+        padding: 10px 67px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="container">
+
+    <form method="post" action="{% url 'security_check' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="website_url">Веб-сайттың URL мекенжайы:</label>
+            <input type="text" id="website_url" name="website_url" required>
+        </div>
+        <button type="submit">Қауіпсіздікті тексеріңіз</button>
+    </form>
+    
+    {% if test_results %}
+    <h2>Қауіпсіздік тестінің нәтижелері</h2>
+    <table>
+        <tr>
+            <th>Тест</th>
+            <th>Нәтижесі</th>
+        </tr>
+        {% for test_result in test_results %}
+        <tr>
+            <td>{{ test_result.0 }}</td>
+            <td>{{ test_result.1 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <ul class="test-description">
+        <li><strong>Бағдарламалық жасақтаманың қауіпсіздігін тексеру:</strong> Веб-сайт пайдаланатын бағдарламалық жасақтамада белгілі осалдықтарды тексереді.</li>
+        <li><strong>Сәйкестікті тексеру:</strong> Салалық стандарттар мен ережелерге сәйкестігін тексереді.</li>
+        <li><strong>Мазмұн қауіпсіздігі саясатын тексеру:</strong> Мазмұн қауіпсіздігі саясатының болуын және дұрыстығын қамтамасыз етеді.</li>
+        <li><strong>Тақырып қауіпсіздігін тексеру:</strong> Веб-сайт енгізген қауіпсіздік тақырыптарын тексереді.</li>
+    </ul>
+    {% endif %}
+    
+    <div class="warning">
+        <p>Ескерту: Бұл веб-сайттың қауіпсіздігін тексеруге еліктеу. Ол нақты қауіпсіздік тестілеуін орындамайды және оны заңды түрде қолдануға болмайды.</p>
+        <p>Бұл еліктеу тек демонстрациялық мақсаттарға арналған.</p>
+        <p>Модельдеудің себептері:</p>
+        <ul>
+            Веб-сайттың қауіпсіздігін тексерудің құрылымы мен логикасын көрсету. <br>
+            Веб-сайт қауіпсіздігінің маңыздылығын атап өту және хабардарлықты арттыру.<br>
+            Пайдаланушыларға жалпы қауіпсіздік мәселелері мен ең жақсы тәжірибелер туралы хабарлау.<br>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

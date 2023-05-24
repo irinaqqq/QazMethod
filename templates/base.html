@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cybersecurity Recommendations</title>
+    <style>
+        /* Simple CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            position: relative;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        nav ul li {
+            float: left;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #111;
+        }
+        .content {
+            padding: 20px;
+        }
+        .navbar-right {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-right img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'recommendations' %}">Ақпараттық қауіпсіздік</a></li>
+                <li><a href="{% url 'security_check' %}">Веб-сайттың қауіпсіздігін бағалау</a></li>
+            </ul>
+            <div class="navbar-right">
+                <span>Ақылбек Парасат</span>
+                <img src="{% static '3.png' %}" alt="Logo">
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
